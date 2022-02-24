@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     private int desiredLane = 1;
     public float laneDistance = 4;
 
+    public float jumpForce;
+    public float Gravity = -20;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();   
@@ -19,7 +22,22 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        controller.Move(direction * Time.fixedDeltaTime);
         direction.z = forwardSpeed;
+
+       
+        if (controller.isGrounded)
+        {
+            direction.y = -1;
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Jump();
+            }
+        }
+        else
+        {
+            direction.y += Gravity * Time.deltaTime;
+        }
 
         //Gather the inputs on which lane we should be
 
@@ -52,8 +70,16 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, 80 * Time.fixedDeltaTime);
     }
 
+    /*
     private void FixedUpdate()
     {
         controller.Move(direction * Time.fixedDeltaTime);
+    }
+
+    */
+
+    private void Jump()
+    {
+        direction.y = jumpForce;
     }
 }
