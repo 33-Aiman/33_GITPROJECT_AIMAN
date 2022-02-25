@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         gameOver = false;
+        Time.timeScale = 1;
     }
 
     void Update()
@@ -19,6 +20,8 @@ public class PlayerManager : MonoBehaviour
         {
             Time.timeScale = 0;
             gameOverPanel.SetActive(true);
+
+            
         }
     }
 }
