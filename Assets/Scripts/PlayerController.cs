@@ -18,9 +18,14 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private bool isSliding = false;
 
+    //Scripttestout to adapt to gamespeed
+    private float originalSpeed;
+    private float speedMultiplier = 1f;
+
     void Start()
     {
-        controller = GetComponent<CharacterController>();   
+        controller = GetComponent<CharacterController>();
+        originalSpeed = forwardSpeed;
     }
 
     
@@ -34,6 +39,8 @@ public class PlayerController : MonoBehaviour
         //Increases gamespeed overtime for difficulty
         if(forwardSpeed < maxSpeed)
             forwardSpeed += 0.1f * Time.deltaTime;
+
+        speedMultiplier = originalSpeed / forwardSpeed;
 
 
         animator.SetBool("isGameStarted", true);
@@ -122,8 +129,8 @@ public class PlayerController : MonoBehaviour
         controller.center = new Vector3(0, -0.5f, 0);
         controller.height = 1;
 
-        yield return new WaitForSeconds(1.3f);
-
+        //yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.1f * speedMultiplier);
         controller.center = new Vector3(0, 0, 0);
         controller.height = 2;
 
