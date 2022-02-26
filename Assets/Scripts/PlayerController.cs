@@ -7,12 +7,16 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 direction;
     public float forwardSpeed;
+    public float maxSpeed;
 
     private int desiredLane = 1;
     public float laneDistance = 4;
 
     public float jumpForce;
     public float Gravity = -20;
+
+    public Animator animator;
+    private bool isSliding = false;
 
     void Start()
     {
@@ -22,33 +26,53 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if (!PlayerManager.isGameStarted)
+            return;
+
         controller.Move(direction * Time.fixedDeltaTime);
+        
+        //Increases gamespeed overtime for difficulty
+        if(forwardSpeed < maxSpeed)
+            forwardSpeed += 0.1f * Time.deltaTime;
+
+
+        animator.SetBool("isGameStarted", true);
         direction.z = forwardSpeed;
+
+        
+     
 
        
         if (controller.isGrounded)
         {
             direction.y = -1;
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) || SwipeManager.swipeUp)
             {
                 Jump();
+                animator.SetBool("isGrounded", false);
             }
         }
         else
         {
             direction.y += Gravity * Time.deltaTime;
+            animator.SetBool("isGrounded", true);
+        }
+
+        if(SwipeManager.swipeDown || Input.GetKeyDown(KeyCode.DownArrow) && !isSliding)
+        {
+            StartCoroutine(Slide());
         }
 
         //Gather the inputs on which lane we should be
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) || SwipeManager.swipeRight)
         {
             desiredLane++;
             if (desiredLane == 3)
                 desiredLane = 2;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || SwipeManager.swipeLeft) 
         {
             desiredLane--;
             if (desiredLane == -1)
@@ -89,5 +113,21 @@ public class PlayerController : MonoBehaviour
         {
             PlayerManager.gameOver = true;
         }
+    }
+
+    private IEnumerator Slide()
+    {
+        isSliding = true;
+        animator.SetBool("isSliding", true);
+        controller.center = new Vector3(0, -0.5f, 0);
+        controller.height = 1;
+
+        yield return new WaitForSeconds(1.3f);
+
+        controller.center = new Vector3(0, 0, 0);
+        controller.height = 2;
+
+        animator.SetBool("isSliding", false);
+        isSliding = false;
     }
 }

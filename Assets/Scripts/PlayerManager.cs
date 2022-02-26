@@ -7,11 +7,15 @@ public class PlayerManager : MonoBehaviour
     public static bool gameOver;
     public GameObject gameOverPanel;
 
+    public static bool isGameStarted;
+    public GameObject startingText;
+
    
     void Start()
     {
         gameOver = false;
         Time.timeScale = 1;
+        isGameStarted = false;
     }
 
     void Update()
@@ -22,6 +26,12 @@ public class PlayerManager : MonoBehaviour
             gameOverPanel.SetActive(true);
 
             
+        }
+
+        if(SwipeManager.tap)
+        {
+            isGameStarted = true;
+            Destroy(startingText);
         }
     }
 }
