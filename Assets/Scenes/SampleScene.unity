@@ -1396,10 +1396,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d85162d50eae684098c456df404259c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 8
-  maxSpeed: 15
+  forwardSpeed: 15
+  maxSpeed: 80
   laneDistance: 2.5
-  jumpForce: 7
+  jumpForce: 8
   Gravity: -20
   animator: {fileID: 561130441}
 --- !u!143 &1794706936
@@ -1420,6 +1420,65 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1832985331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1832985333}
+  - component: {fileID: 1832985332}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1832985332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832985331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd380d97af8c0e46ae7244f529d50ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainTheme
+    clip: {fileID: 8300000, guid: 97ef5fec45cf5c94b87bd251ad486367, type: 3}
+    volume: 0.2
+    loop: 1
+    source: {fileID: 0}
+  - name: PickUpCoin
+    clip: {fileID: 8300000, guid: ec8bece9c4e4c7543a7a0c56fb430b2e, type: 3}
+    volume: 0.01
+    loop: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 2376ec10dad2f51488c07fb0cae9a5f5, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1832985333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832985331}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1841074295
 GameObject:
   m_ObjectHideFlags: 0
