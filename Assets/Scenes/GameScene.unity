@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -470,6 +470,9 @@ MonoBehaviour:
   gameOverPanel: {fileID: 2076393489}
   startingText: {fileID: 1559540154}
   coinsText: {fileID: 1229501790}
+  disDisplay: {fileID: 428569948}
+  disRun: 0
+  addingDis: 0
 --- !u!1 &428569948
 GameObject:
   m_ObjectHideFlags: 0
