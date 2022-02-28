@@ -22,8 +22,11 @@ public class PlayerController : MonoBehaviour
     private float originalSpeed;
     private float speedMultiplier = 1f;
 
+    //Enables/Disables Player movement when game over
+
     void Start()
     {
+
         controller = GetComponent<CharacterController>();
         originalSpeed = forwardSpeed;
     }
